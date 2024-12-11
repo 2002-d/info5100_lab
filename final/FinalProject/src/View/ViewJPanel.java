@@ -4,11 +4,12 @@
  */
 package View;
 
-import Model.Patient;
+import Model.Customer;
 import Utility.DatabaseConnector;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -17,10 +18,11 @@ import javax.swing.table.DefaultTableModel;
  * @author yashu
  */
 public final class ViewJPanel extends javax.swing.JPanel {
-        ArrayList <Patient> patients;
-        Patient selectedPatient;
+        ArrayList <Customer> customers;
         ImageIcon profilePicture;
-    Patient p1;
+        Customer c1;
+        private Customer selectedCustomer;
+
     /**
      * Creates new form FormJPanel
      */
@@ -30,8 +32,8 @@ public final class ViewJPanel extends javax.swing.JPanel {
         disableAll();
     }
     
-    public ViewJPanel(Patient p1){
-        this.p1 = p1;
+    public ViewJPanel(Customer c1){
+        this.c1 = c1;
         initComponents();
         populateTable();
         populateData();
@@ -48,35 +50,53 @@ public final class ViewJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         buttonGroupGender = new javax.swing.ButtonGroup();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jLabelFirstname = new javax.swing.JLabel();
         jLabelTitle = new javax.swing.JLabel();
-        jTextFirstName = new javax.swing.JTextField();
+        jTextFullName = new javax.swing.JTextField();
         jLabelGender = new javax.swing.JLabel();
         jRadioButtonMale = new javax.swing.JRadioButton();
         jRadioButtonFemale = new javax.swing.JRadioButton();
         jRadioButtonOthers = new javax.swing.JRadioButton();
-        jTextAge = new javax.swing.JTextField();
         jLabelAge = new javax.swing.JLabel();
+        jTextAge = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jTextphone = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextemail = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jTextCarmake = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jTextCarmodel = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jYearChooser = new com.toedter.calendar.JYearChooser();
+        jLabelFirstname = new javax.swing.JLabel();
         jLabelpatienttype = new javax.swing.JLabel();
-        patientTypejComboBox = new javax.swing.JComboBox<>();
+        appointTypejComboBox = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jDateChooser = new com.toedter.calendar.JDateChooser();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jdeleteButton = new javax.swing.JButton();
-        jeditButton = new javax.swing.JButton();
+        jButtonDelete = new javax.swing.JButton();
+        jButtonEdit = new javax.swing.JButton();
         jButtonSubmit = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         setBackground(new java.awt.Color(0, 204, 204));
 
         jPanel1.setBackground(new java.awt.Color(0, 204, 204));
 
-        jLabelFirstname.setText("FIRST NAME:");
+        jLabelTitle.setText("Quotation Form");
 
-        jLabelTitle.setText("Patient Registration Form");
-
-        jTextFirstName.addActionListener(new java.awt.event.ActionListener() {
+        jTextFullName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFirstNameActionPerformed(evt);
+                jTextFullNameActionPerformed(evt);
             }
         });
 
@@ -109,36 +129,145 @@ public final class ViewJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabelAge.setText("AGE:");
+        jLabelAge.setText("AGE");
 
-        jLabelpatienttype.setText("PATIENT TYPE:");
+        jLabel2.setText("PHONE NO.:");
 
-        patientTypejComboBox.setEditable(true);
-        patientTypejComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "appointment", "virtual", "walk-in" }));
-        patientTypejComboBox.setSelectedIndex(-1);
-        patientTypejComboBox.addActionListener(new java.awt.event.ActionListener() {
+        jTextphone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                patientTypejComboBoxActionPerformed(evt);
+                jTextphoneActionPerformed(evt);
             }
         });
+
+        jLabel3.setText("EMAIL:");
+
+        jLabel1.setText("CAR MAKE:");
+
+        jLabel4.setText("CAR MODEL:");
+
+        jLabel5.setText("YEAR OF MAKE:");
+
+        jLabelFirstname.setText("FULL NAME:");
+
+        jLabelpatienttype.setText("APPOINTMENT TYPE:");
+
+        appointTypejComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "appointment", "virtual", "walk-in" }));
+        appointTypejComboBox.setSelectedIndex(-1);
+        appointTypejComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                appointTypejComboBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("APPOINTMENT DATE:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelGender)
+                            .addComponent(jLabelAge)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabelFirstname)
+                            .addComponent(jLabelpatienttype)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFullName, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jRadioButtonMale)
+                            .addComponent(jRadioButtonFemale)
+                            .addComponent(jRadioButtonOthers)
+                            .addComponent(jTextAge, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextphone, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextemail, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextCarmake, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextCarmodel, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jYearChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(appointTypejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(131, 131, 131)
+                        .addComponent(jLabelTitle)))
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFullName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelFirstname))
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelGender)
+                    .addComponent(jRadioButtonMale))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButtonFemale)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButtonOthers)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelAge)
+                    .addComponent(jTextAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextphone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jTextemail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jTextCarmake, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jTextCarmodel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addComponent(jYearChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelpatienttype)
+                    .addComponent(appointTypejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
 
         jTable1.setAutoCreateRowSorter(true);
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "id", "firstname", "age", "gender", "patientType"
+                "id", "fullname", "age", "gender", "phone", "email", "car_make", "car_model", "yearofmake", "appointment_type", "appointment_date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -153,17 +282,17 @@ public final class ViewJPanel extends javax.swing.JPanel {
         jTable1.setDropMode(javax.swing.DropMode.ON);
         jScrollPane1.setViewportView(jTable1);
 
-        jdeleteButton.setText("delete row");
-        jdeleteButton.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDelete.setText("Delete");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jdeleteButtonActionPerformed(evt);
+                jButtonDeleteActionPerformed(evt);
             }
         });
 
-        jeditButton.setText("Edit row");
-        jeditButton.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEdit.setText("Edit");
+        jButtonEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jeditButtonActionPerformed(evt);
+                jButtonEditActionPerformed(evt);
             }
         });
 
@@ -174,103 +303,47 @@ public final class ViewJPanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(92, 92, 92)
-                                .addComponent(jLabelTitle))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabelGender)
-                                    .addComponent(jLabelAge)
-                                    .addComponent(jLabelpatienttype)
-                                    .addComponent(jLabelFirstname))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jRadioButtonMale)
-                                    .addComponent(jRadioButtonFemale)
-                                    .addComponent(jRadioButtonOthers)
-                                    .addComponent(jTextAge, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(patientTypejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jeditButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jdeleteButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonSubmit)
-                        .addGap(15, 15, 15))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(1, 1, 1)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelFirstname)
-                            .addComponent(jTextFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelGender)
-                            .addComponent(jRadioButtonMale))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButtonFemale)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButtonOthers)
-                        .addGap(6, 6, 6)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelAge)
-                            .addComponent(jTextAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabelpatienttype, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(patientTypejComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, 46)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jdeleteButton)
-                            .addComponent(jButtonSubmit))
-                        .addGap(28, 28, 28)
-                        .addComponent(jeditButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(354, 354, 354)
+                        .addComponent(jButtonDelete)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addComponent(jButtonEdit)
+                        .addGap(45, 45, 45)
+                        .addComponent(jButtonSubmit)
+                        .addGap(57, 57, 57)))
+                .addGap(144, 144, 144)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonDelete)
+                    .addComponent(jButtonEdit)
+                    .addComponent(jButtonSubmit))
+                .addGap(118, 118, 118))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextFirstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFirstNameActionPerformed
+    private void jTextFullNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFullNameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFirstNameActionPerformed
+    }//GEN-LAST:event_jTextFullNameActionPerformed
 
     private void jRadioButtonMaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMaleActionPerformed
         // TODO add your handling code here:
@@ -284,61 +357,86 @@ public final class ViewJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButtonOthersActionPerformed
 
-    private void patientTypejComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientTypejComboBoxActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_patientTypejComboBoxActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jdeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jdeleteButtonActionPerformed
-       int selectedRowIndex = this.jTable1.getSelectedRow();
+    private void appointTypejComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointTypejComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_appointTypejComboBoxActionPerformed
+
+    private void jTextphoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextphoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextphoneActionPerformed
+
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+    int selectedRowIndex = this.jTable1.getSelectedRow();
     
     if (selectedRowIndex == -1) {
         System.out.println("No row selected."); // Check if a row is selected
         return; // Exit if no row is selected
     }
     
-    this.selectedPatient = this.patients.get(selectedRowIndex);
+    this.selectedCustomer = this.customers.get(selectedRowIndex);
     
     try {
-        DatabaseConnector.deletePatient(selectedPatient); // Delete patient
-        System.out.println("Patient deleted successfully");
+        DatabaseConnector.deleteCustomer(selectedCustomer); // Delete patient
+        System.out.println("Customer deleted successfully");
         populateTable(); // Refresh the table data
         this.jTable1.repaint(); // Force table UI refresh
     } catch (Exception e) {
         System.out.println("Unable to delete the patient");
         e.printStackTrace(); // Print the full error stack trace
     }
- 
-    }//GEN-LAST:event_jdeleteButtonActionPerformed
+         // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
 
-    private void jeditButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jeditButtonActionPerformed
-            int selectedRowIndex = this.jTable1.getSelectedRow();
+    private void jButtonEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActionPerformed
+ int selectedRowIndex = this.jTable1.getSelectedRow();
+ if (selectedRowIndex == -1) {
+        JOptionPane.showMessageDialog(this, "Please select a customer to edit.");
+        return;
+    }
+
             enableAll();
-            this.selectedPatient = this.patients.get(selectedRowIndex);
-            populateData();
-    }//GEN-LAST:event_jeditButtonActionPerformed
+            this.selectedCustomer = this.customers.get(selectedRowIndex);
+            populateData();        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEditActionPerformed
 
     private void jButtonSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSubmitActionPerformed
-            Patient updatedPatient = new Patient();
-            updatedPatient.setFirstname (this.jTextFirstName.getText());
-            updatedPatient.setGender(this.buttonGroupGender.getSelection().getActionCommand());
-            updatedPatient.setAge(this.jTextAge.getText());
-            updatedPatient.setPatientType(this.patientTypejComboBox.getSelectedItem().toString());
-            DatabaseConnector.updatePatient(selectedPatient, updatedPatient);
-            populateTable();
+            Customer updatedCustomer = new Customer();
+            updatedCustomer.setFullname(this.jTextFullName.getText());
+            updatedCustomer.setGender(this.buttonGroupGender.getSelection().getActionCommand());
+            updatedCustomer.setAge(this.jTextAge.getText());
+            updatedCustomer.setPhone(this.jTextphone.getText());
+            updatedCustomer.setEmail(this.jTextemail.getText());
+            updatedCustomer.setCarmake(this.jTextCarmake.getText());
+            updatedCustomer.setCarmodel(this.jTextCarmodel.getText());
+            updatedCustomer.setMakeyear(this.jYearChooser.getYear());
+            updatedCustomer.setAppointType(this.appointTypejComboBox.getSelectedItem().toString());
+            updatedCustomer.setAppointdate(this.jDateChooser.getDate());
+            DatabaseConnector.updateCustomer(selectedCustomer, updatedCustomer);
+            populateTable();               // TODO add your handling code here:
     }//GEN-LAST:event_jButtonSubmitActionPerformed
     public void populateTable(){
-        this.patients = DatabaseConnector.getPatients();
+        this.customers = DatabaseConnector.getCustomers();
         DefaultTableModel model = (DefaultTableModel)  this.jTable1.getModel();
-        model.setColumnIdentifiers(new String[] {"ID", "First Name", "Age", "Gender", "Patient Type"});
+        model.setColumnIdentifiers(new String[] {"Id", "fullname", "age", "gender", "phone", "email", "carmake", "carmodel", "makeyear", "appointType", "appointdate"});
 
         model.setRowCount(0);
-        for (Patient p1: patients){
-            Object [] row = new Object[5];
-            row[0] = p1.getId();
-            row[1] = p1.getFirstname();
-            row[2] = p1.getAge();
-            row[3] = p1.getGender();
-            row[4] = p1.getPatientType();
+        for (Customer c1: customers){
+            Object [] row = new Object[11];
+            row[0] = c1.getId();
+            row[1] = c1.getFullname();
+            row[2] = c1.getAge();
+            row[3] = c1.getGender();
+            row[4] = c1.getPhone();
+            row[5] = c1.getEmail();
+            row[6] = c1.getCarmake();
+            row[7] = c1.getCarmodel();
+            row[8] = c1.getMakeyear();
+            row[9] = c1.getAppointType();
+            row[10] = c1.getappointdate();
             model.addRow(row);
 
         }
@@ -346,39 +444,66 @@ public final class ViewJPanel extends javax.swing.JPanel {
     
     
     public void populateData(){
-        this.jTextFirstName.setText(p1.getFirstname());
-        this.jTextAge.setText(p1.getAge());
-        this.patientTypejComboBox.setSelectedItem(p1.getPatientType());
-        String gender = p1.getGender();
-        if(gender.equals("male")){
-        this.buttonGroupGender.setSelected(this.jRadioButtonMale.getModel(), true);
-    }else if(gender.equals("female")){
-        this.buttonGroupGender.setSelected(this.jRadioButtonFemale.getModel(), true);
-    } else {
-        this.buttonGroupGender.setSelected(this.jRadioButtonOthers.getModel(), true);
-    }
+        this.jTextFullName.setText(c1.getFullname());
+        this.jTextAge.setText(c1.getAge());
+        this.jTextphone.setText(c1.getPhone());
+        this.jTextemail.setText(c1.getEmail());
+        this.jTextCarmake.setText(c1.getCarmake());
+        this.jTextCarmodel.setText(c1.getCarmodel());
+        this.jDateChooser.setDate(c1.getappointdate());
+        this.jYearChooser.setYear(c1.getMakeyear());
+        this.appointTypejComboBox.setSelectedItem(c1.getAppointType());
+        String gender = c1.getGender();
+            switch (gender) {
+                case "male" -> this.buttonGroupGender.setSelected(this.jRadioButtonMale.getModel(), true);
+                case "female" -> this.buttonGroupGender.setSelected(this.jRadioButtonFemale.getModel(), true);
+                default -> this.buttonGroupGender.setSelected(this.jRadioButtonOthers.getModel(), true);
+            }
     }
         public void enableAll(){
         this.jRadioButtonFemale.setEnabled(true);
         this.jRadioButtonMale.setEnabled(true);
         this.jRadioButtonOthers.setEnabled(true);
-        this.patientTypejComboBox.setEnabled(true);
-        this.jTextFirstName.setEnabled(true);
+        this.appointTypejComboBox.setEnabled(true);
+        this.jTextFullName.setEnabled(true);
         this.jTextAge.setEnabled(true);
+        this.jTextphone.setEnabled(true);
+        this.jTextemail.setEnabled(true);
+        this.jTextCarmake.setEnabled(true);
+        this.jTextCarmodel.setEnabled(true);
+        this.jYearChooser.setEnabled(true);
+        this.jDateChooser.setEnabled(true);
 }
         public void disableAll(){
 
         this.jRadioButtonFemale.setEnabled(false);
         this.jRadioButtonMale.setEnabled(false);
         this.jRadioButtonOthers.setEnabled(false);
-        this.patientTypejComboBox.setEnabled(false);
-        this.jTextFirstName.setEnabled(false);
+        this.appointTypejComboBox.setEnabled(false);
+        this.jTextFullName.setEnabled(false);
         this.jTextAge.setEnabled(false);
+        this.jTextphone.setEnabled(false);
+        this.jTextemail.setEnabled(false);
+        this.jTextCarmake.setEnabled(false);
+        this.jTextCarmodel.setEnabled(false);
+        this.jYearChooser.setEnabled(false);
+        this.jDateChooser.setEnabled(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> appointTypejComboBox;
     private javax.swing.ButtonGroup buttonGroupGender;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonDelete;
+    private javax.swing.JButton jButtonEdit;
     private javax.swing.JButton jButtonSubmit;
+    private com.toedter.calendar.JDateChooser jDateChooser;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelAge;
     private javax.swing.JLabel jLabelFirstname;
     private javax.swing.JLabel jLabelGender;
@@ -391,9 +516,11 @@ public final class ViewJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextAge;
-    private javax.swing.JTextField jTextFirstName;
-    private javax.swing.JButton jdeleteButton;
-    private javax.swing.JButton jeditButton;
-    private javax.swing.JComboBox<String> patientTypejComboBox;
+    private javax.swing.JTextField jTextCarmake;
+    private javax.swing.JTextField jTextCarmodel;
+    private javax.swing.JTextField jTextFullName;
+    private javax.swing.JTextField jTextemail;
+    private javax.swing.JTextField jTextphone;
+    private com.toedter.calendar.JYearChooser jYearChooser;
     // End of variables declaration//GEN-END:variables
 }
